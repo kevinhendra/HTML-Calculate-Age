@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Menghitung Umur</title>
+
+ <style>
+   .body-1{
+    width: 100%;
+    height: 80px;
+    background-color: #0d0d0d;
+    border-radius: 7px;
+   }
+
+   .tex-1{
+      padding-top: 20px;
+      text-align: center;
+      font-family: Arial;
+      color: white;
+    }
+
+    .tex-2{
+      padding-top: 20px;
+      text-align: center;
+      font-family: Arial;
+      color: black;
+      text-decoration: underline; 
+    }
+
+    .body-2{
+      margin-left: 500px;
+      margin-top: 20px;
+    }
+
+    input[type=button] {
+      width: 100px;
+      background-color: black;
+      color: white;
+      font-size: 20px;
+      box-sizing: border-box;
+      border-radius: 7px;
+      margin-left: 320px;
+      margin-top: 20px;
+    }
+ </style>
+ 
+ <script>
+  /*untuk mendeklarasikan fungsi*/
+  function umur(){
+   var sekarang = new Date();
+   var tanggal = parseInt(document.forms[0].tanggal.value);//Fungsi parseInt () mem-parsing string dan mengembalikan sebuah integer.
+   var bulan = parseInt(document.forms[0].bulan.value)-1;
+   var tahun = parseInt(document.forms[0].tahun.value);
+   var tglLahir = new Date(tahun, bulan, tanggal);
+   var selisih = (Date.parse(sekarang.toGMTString())-Date.parse(tglLahir.toGMTString()))/(1000*60*60*24*365.25); //untuk menghitung selisih umur yang sudah dimasukan
+   if (selisih <= 0) {
+    alert("Belum Lahir");
+   }else {
+   document.forms[0].usia.value = Math.floor(selisih); //membulatkan angka DOWNWARD ke integer terdekat, dan mengembalikan hasilnya
+   }
+  }
+ </script>
+</head>
+<body>
+ <form>
+  <div class="body-1">
+    <h1 class="tex-1">Menghitung Umur</h1>
+  </div>
+ 
+ <h2 class="tex-2">Masukan Tanggal Lahir</h2><br/>
+    <div class="body-2">
+     
+     <input type="text" name="tanggal" size="15" placeholder="Masukan Tanngal" />
+     <input type="text" name="bulan" size="15" placeholder="Masukan Bulan"/>
+     <input type="text" name="tahun" size="20" placeholder="Masukan Tahun < 2018" /><br/>
+     <input type="button" name="proses" value="proses" onClick="umur()"/>
+     <br />
+     USIA KAMU : <input type="text" name="usia" /><br/>
+    </div>
+ </form>
+</body>
+</html>
